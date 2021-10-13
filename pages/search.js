@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import Image from "next/image";
+import Map from "../components/Map";
 
 export const getServerSideProps = async () => {
   const searchResults = await fetch("https://links.papareact.com/isz").then(
@@ -48,6 +49,10 @@ const Search = ({ searchResults }) => {
               <Card key={item.img} {...item} />
             ))}
           </div>
+        </section>
+
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map searchResults={searchResults} />
         </section>
       </main>
 
