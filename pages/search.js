@@ -37,7 +37,7 @@ const Search = ({ searchResults }) => {
           </p>
           <h1 className="text-3xl font-semibold mt-2 mb-6">Stays in {l}</h1>
 
-          <div className="hidden lg:inline-flex mb-5 select-none space-x-3 text-gray-800 whitespace-nowrap">
+          <div className="hidden lg:inline-flex mb-5 select-none space-x-3 text-gray-800 dark:text-[#333333] whitespace-nowrap">
             <p className="button">Cancelation Flexibility</p>
             <p className="button">Price</p>
             <p className="button">Rooms and Beds</p>

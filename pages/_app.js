@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 import "../styles/global.css";
 import ProgressBar from "@badrap/bar-of-progress";
 import { Router } from "next/dist/client/router";
+import { ThemeProvider } from "next-themes";
 
 const progress = new ProgressBar({
   size: 4,
@@ -17,7 +18,9 @@ Router.events.on("routeChangeError", progress.finish);
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Component {...pageProps} />
+      <ThemeProvider enableSystem={true} attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

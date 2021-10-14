@@ -1,3 +1,4 @@
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import {
   GlobeAltIcon,
@@ -5,6 +6,8 @@ import {
   UserCircleIcon,
   SearchIcon,
   UsersIcon,
+  SunIcon,
+  MoonIcon,
 } from "@heroicons/react/solid";
 import { useState } from "react";
 import "react-date-range/dist/styles.css";
@@ -13,11 +16,37 @@ import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/dist/client/router";
 
 const Header = ({ placeholder }) => {
+  const { systemTheme, theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [noOfGuests, setNoOfGuests] = useState(1);
   const router = useRouter();
+
+  const renderThemeChanger = () => {
+    // if (!mounted) return null;
+
+    const currTheme = theme === "system" ? systemTheme : theme;
+
+    if (currTheme === "dark") {
+      return (
+        <SunIcon
+          className="w-7 h-7"
+          role="button"
+          onClick={() => setTheme("light")}
+        />
+      );
+    } else {
+      return (
+        <MoonIcon
+          className="w-7 h-7"
+          role="button"
+          onClick={() => setTheme("dark")}
+        />
+      );
+    }
+  };
 
   const selectionRange = {
     startDate,
@@ -48,7 +77,7 @@ const Header = ({ placeholder }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
+      <header className="sticky top-0 z-50 grid grid-cols-3 bg-white dark:bg-[#121212] shadow-md p-5 md:px-10">
         {/* left side  */}
         <div
           onClick={() => router.push("/")}
@@ -75,10 +104,15 @@ const Header = ({ placeholder }) => {
           <SearchIcon className="hidden md:inline-flex h-8 mr-5 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2" />
         </div>
 
+        {/* <div className="flex items-center md:shadow-sm">
+          {renderThemeChanger()}
+        </div> */}
+
         {/* right side */}
         <div className="flex items-center justify-end text-gray-500 space-x-4">
           <p className="hidden md:inline">Become a host</p>
           <GlobeAltIcon className="h-6 cursor-pointer" />
+          {renderThemeChanger()}
 
           <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
             <MenuIcon className="h-6 cursor-pointer" />
