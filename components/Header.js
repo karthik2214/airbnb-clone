@@ -112,10 +112,9 @@ const Header = ({ placeholder }) => {
         <div className="flex items-center justify-end text-gray-500 space-x-4">
           <p className="hidden md:inline">Become a host</p>
           <GlobeAltIcon className="h-6 cursor-pointer" />
-          {renderThemeChanger()}
 
           <div className="flex items-center space-x-2 border-2 p-2 rounded-full">
-            <MenuIcon className="h-6 cursor-pointer" />
+            {renderThemeChanger()}
             <UserCircleIcon className="h-6 cursor-pointer" />
           </div>
         </div>
